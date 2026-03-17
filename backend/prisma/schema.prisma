@@ -14,4 +14,45 @@ datasource db {
   directUrl = env("DIRECT_URL")
 }
 
+model User {
+  id Int @id @default(autoincrement())
+  name String 
+  email String @unique
+  password String
+  createdAt DateTime @default(now())
+
+}
+
+model Question {
+  id Int @id @default(autoincrement())
+  title String
+  link String?
+  topic String?
+  difficulty String?
+  platform String?
+  pattern String?
+  createdAt DateTime @default(now())
+}
+model UserQuestionProgress {
+  id Int @id @default(autoincrement())
+  userId Int
+  questionId Int
+
+  solveMethod String 
+  notes String?
+
+  revisionCount Int @default(0)
+  lastSolvedAt DateTime?
+  nextRevisionAt DateTime
+
+  createdAt DateTime @default(now())
+}
+model RevisionHistory {
+  id Int @id @default(autoincrement())
+  userId Int
+  questionId Int
+
+  result String
+  revisionDate DateTime @default(now())
+}
 
